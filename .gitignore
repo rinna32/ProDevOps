@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+
+# Virtual env
+.venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+
+# macOS (обязательно!)
+.DS_Store
+*.swp
+
+# Secrets
+.env
