@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <img src="{{ url_for('static', filename='meme.jpg') }}">
+    <p>Количество подкатов: <span id="likeCount">{{ likes }}</span></p>
+    <button onclick="sendLike()">Подкатить</button>
+    <p><small>Страница обновлена {{ views }} раз(а)</small></p>
+
+    <script>
+        async function sendLike() {
+            const response = await fetch('/like', { method: 'POST' });
+            const data = await response.json();
+            document.getElementById('likeCount').innerText = data.likes;
+        }
+    </script>
+</body>
+</html>
+EOF

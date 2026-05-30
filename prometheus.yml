@@ -1,0 +1,16 @@
+
+global:
+  scrape_interval: 15s #интервал, с которым prom будет опрашивать метрики со всех целевых систем
+
+#список заданий (каждое задание описывает, откуда и как собирать метрики)
+scrape_configs:
+  - job_name: 'prometheus' #мониторинг самого prom
+    static_configs:
+      #список адресов целей
+      - targets: ['localhost:9090'] # localhost:9090 - стандартный эндпоинт метрик самого prom
+
+  - job_name: 'my-python-app'
+    static_configs:
+      - targets: ['python-app:8000']  #имя контейнера в docker-compose.yml: python-app
+        # docker compose автоматически создаёт DNS-запись, позволяя контейнерам в одной сети обращаться друг к другу по имени сервиса.
+        # 8000 - порт, на котором приложение внутри контейнера отдаёт метрики (эндпоинт /metrics)
